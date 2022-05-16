@@ -1,1 +1,1 @@
-web:flask db upgrade;gunicorn --bind 0.0.0.0:$PORT flaskapp:app
+web: python manage.py runserver --host 0.0.0.0 --port ${PORT}
