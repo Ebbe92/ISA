@@ -1,6 +1,6 @@
-#from application import db
+from application import db
 from application import login
-from manage import db,app
+#from manage import db,app
 from flask_login import UserMixin
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
