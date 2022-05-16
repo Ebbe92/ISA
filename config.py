@@ -12,5 +12,5 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_DURATION=timedelta(seconds=20)
     REMEMBER_COOKIE_REFRESH_EACH_REQUEST = True
-    
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
     
