@@ -1,0 +1,61 @@
+.vertical {
+    border: 15px solid green;
+    padding: 0 0 0 0;
+    margin: 20px;
+    height: 80%;
+    position:absolute;
+    left: 53%;
+}
+
+.hrProject{
+    border-style: solid; 
+    margin-top: 400px;
+    /*margin-right:448px;*/
+    position: relative;
+    right:30%;
+    
+}
+
+.hrInsider{
+    border-style: solid;
+    margin-top: 380px;
+    position: relative;
+}
+
+.boxModel{
+    width: 730px;
+    border: 15px solid green;
+    padding: 0 0 0 0;
+    margin: 20px;
+}
+
+.boxData{
+    width: 730px;
+    border: 15px solid green;
+    padding: 0 0 100px 0;
+    margin: 20px;
+}
+
+
+/*.vertical {
+    border-left: 2px solid black;
+    height: 100%;
+    position:absolute;
+    left: 70%;
+}
+
+.hrProject{
+    border-style: solid; 
+    margin-top: 400px;
+    margin-right:448px;
+    position: relative;
+    right:30%;
+    
+}
+
+.hrInsider{
+    border-style: solid;
+    margin-top: 380px;
+    position: relative;
+}
+*/

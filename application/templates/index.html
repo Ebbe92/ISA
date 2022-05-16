@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h1>Ebbe portifolio</h1>
+    <hr>
+    <h2> Machine learning Projects!</h2>
+    <ul>
+        <li class="nav-item"><a href="{{ url_for('project') }}" class="nav-link">project</a></li>
+        <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link">login</a></li>
+    </ul>
+    <hr>
+{% endblock %}

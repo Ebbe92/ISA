@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h1> {{ current_user.username}}'s page!</h1>
+    
+    
+    <!--static/img/base_pic.svg  width="700" height = 300 'img/predictions_pic.svg' -->
+    <div>
+        <!--<hr class="hrProject">-->
+        
+        <h1>Data input</h1>
+        <form method="POST" action="/project" id="form1">
+            <label>What is your weight (in kilos)?: </label>
+            <input type="text" id ="Weight" name="mycheckbox" value="" class = "Weight">
+            <br><br>
+            <label>What is your gender? </label>
+            <label for="Gender1"> 
+                <input type="checkbox" id="Gender1"  name="mycheckbox" value="Female" class="Gender" />Female</label>
+            <label for="Gender2"> 
+                <input type="checkbox" id="Gender2"  name="mycheckbox" value="Male" class="Gender"/>Male</label>
+            <br><br>
+            <label>What is your Age?: </label>
+            <input type="text" id ="Age" name="mycheckbox" value="" class = "Age">
+            <br><br>
+            <label>What is your height (in meters)?: </label>
+            <input type="text" id ="Height" name="mycheckbox" value="" class = "Height">
+            <br><br>
+            <label>Has a family member suffered or suffers from overweight?: </label>
+            <input type="checkbox" id="Family1" name="mycheckbox" value="yes" class = "Family">
+            <label for="Gender1"> yes</label>
+            <input type="checkbox" id="Family2" name="mycheckbox" value="no" class = "Family">
+            <label for="Gender2"> no</label>
+            <br><br>
+            <label>Do you eat high caloric food frequently?: </label>
+            <input type="checkbox" id="FAVC1" name="mycheckbox" value="yes" class = "FAVC">
+            <label for="Gender1"> yes</label>
+            <input type="checkbox" id="FAVC2" name="mycheckbox" value="no" class = "FAVC">
+            <label for="Gender2"> no</label>
+            <br><br>
+            <label>Do you usually eat vegetabels in your meals?: </label>
+            <input type="checkbox" id="FCVC1" name="mycheckbox" value="1" class = "FCVC">
+            <label for="FCVC1"> Never</label>
+            <input type="checkbox" id="FCVC2" name="mycheckbox" value="2" class = "FCVC">
+            <label for="FCVC2"> Sometimes</label>
+            <input type="checkbox" id="FCVC3" name="mycheckbox" value="3" class = "FCVC">
+            <label for="FCVC3"> Always</label>
+            <br><br>
+            <label>How many meals do you have daily?: </label>
+            <input type="checkbox" id="NCP1" name="mycheckbox" value="1" class = "NCP">
+            <label for="FCVC1"> Between 1 & 2</label>
+            <input type="checkbox" id="NCP2" name="mycheckbox" value="2" class = "NCP">
+            <label for="FCVC2"> Three</label>
+            <input type="checkbox" id="NCP3" name="mycheckbox" value="3"class = "NCP">
+            <label for="FCVC3"> More than 3</label>
+            <br><br>
+            <label>Do you eat any food between meals? </label>
+            <input type="checkbox" id="CAEC1" name="mycheckbox" value="Sometimes" class = "CAEC">
+            <label for="CAEC1"> Sometimes</label>
+            <input type="checkbox" id="CAEC2" name="mycheckbox" value="Frequently" class = "CAEC">
+            <label for="CAEC2"> Frequently</label>
+            <input type="checkbox" id="CAEC3" name="mycheckbox" value="Always" class = "CAEC">
+            <label for="CAEC3"> Always</label>
+            <br><br>
+            <label>How much water do you drink daily? </label>
+            <input type="checkbox" id="CH2O1" name="mycheckbox" value=1 class ="CH2O">
+            <label for="CH2O1"> Less than a liter</label>
+            <input type="checkbox" id="CH2O2" name="mycheckbox" value=2 class ="CH2O">
+            <label for="CH2O2"> Between 1 and 2 L</label>
+            <input type="checkbox" id="CH2O3" name="mycheckbox" value=3 class ="CH2O">
+            <label for="CH2O3"> More than 2 L</label>
+            
+            <br><br>
+            <label>Do you monitor the calories you eat daily? </label>
+            <input type="checkbox" id="SCC1" name="mycheckbox" value="yes" class ="SCC">
+            <label for="SCC1"> yes</label>
+            <input type="checkbox" id="SCC2" name="mycheckbox" value="no" class ="SCC">
+            <label for="SCC2"> no</label>
+            <br><br>
+            <label>How often are you physical active during a week? </label>
+            <input type="checkbox" id="FAF1" name="mycheckbox" value=0 class ="FAF">
+            <label for="FAF1"> I don't spend time on being physical active</label>
+            <input type="checkbox" id="FAF2" name="mycheckbox" value=1 class ="FAF">
+            <label for="FAF2"> 1 or 2 days</label>
+            <input type="checkbox" id="FAF3" name="mycheckbox" value=2 class ="FAF">
+            <label for="FAF3"> 2 or 4 days</label>
+            <input type="checkbox" id="FAF4" name="mycheckbox" value=3 class ="FAF">
+            <label for="FAF4"> 4 or 5 days</label>
+            <br><br>
+            <label>How much time do you spend on devices such as cell phone, videogames, television, computer and others? </label>
+            <input type="checkbox" id="TUE1" name="mycheckbox" value=0 class ="TUE">
+            <label for="TUE1"> 0-2 HOURS </label>
+            <input type="checkbox" id="TUE2" name="mycheckbox" value=1 class ="TUE">
+            <label for="TUE2"> 3-5 hours</label>
+            <input type="checkbox" id="TUE3" name="mycheckbox" value=2 class ="TUE">
+            <label for="TUE3"> more than 5 hours</label>
+            <br><br>
+            <label>How often do you drink alcohol? </label>
+            <input type="checkbox" id="CALC1" name="mycheckbox" value="no" class ="CALC">
+            <label for="CALC1"> I do not drink </label>
+            <input type="checkbox" id="CALC2" name="mycheckbox" value="Sometimes" class ="CALC">
+            <label for="CALC2"> Sometimes</label>
+            <input type="checkbox" id="CALC3" name="mycheckbox" value="Frequently" class ="CALC"> 
+            <label for="CALC3"> Frequently </label>
+            <input type="checkbox" id="CALC4" name="mycheckbox" value="Always" class ="CALC">
+            <label for="CALC4"> Always </label>
+            <br><br>
+            <label>Which transportation do you usually use? </label>
+            <input type="checkbox" id="MTRANS1" name="mycheckbox" value="Automobile" class ="MTRANS">
+            <label for="MTRANS1"> Car </label>
+            <input type="checkbox" id="MTRANS2" name="mycheckbox" value="Motorbike" class ="MTRANS">
+            <label for="MTRANS2"> Motorbike</label>
+            <input type="checkbox" id="MTRANS3" name="mycheckbox" value="Bike" class ="MTRANS">
+            <label for="MTRANS3"> Bike </label>
+            <input type="checkbox" id="MTRANS4" name="mycheckbox" value="Public_Transportation" class ="MTRANS">
+            <label for="MTRANS4"> Public Transportation </label>
+            <input type="checkbox" id="MTRANS5" name="mycheckbox" value="Walking" class ="MTRANS">
+            <label for="MTRANS5"> Walking </label>
+            <br><br>
+            </form>
+            <!--<input type="submit" id="button">-->
+            <button type="submit" form="form1" id="button_submit">Submit</button>
+       
+        <!--type="text/javascript"-->
+        <!---https://codingspoint.com/select-only-one-checkbox-at-a-time-using-jquery/-->
+    </div>
+    <script>
+        
+        
+        //The class can only be checked once
+        
+	    $('.Gender').on('change', function() {
+		    $('.Gender').not(this).prop('checked', false);
+              
+		});
+        $('.Family').on('change', function() {
+		    $('.Family').not(this).prop('checked', false);
+              
+		});
+        $('.FAVC').on('change', function() {
+		    $('.FAVC').not(this).prop('checked', false);
+              
+		});
+       
+        $('.FCVC').on('change', function() {
+		    $('.FCVC').not(this).prop('checked', false);
+              
+		});
+        $('.NCP').on('change', function() {
+		    $('.NCP').not(this).prop('checked', false);
+              
+		});
+        $('.CAEC').on('change', function() {
+		    $('.CAEC').not(this).prop('checked', false);
+              
+		});
+        
+        $('.CH2O').on('change', function() {
+		    $('.CH2O').not(this).prop('checked', false);
+              
+		});
+        $('.SCC').on('change', function() {
+		    $('.SCC').not(this).prop('checked', false);
+              
+		});
+        
+        $('.FAF').on('change', function() {
+		    $('.FAF').not(this).prop('checked', false);
+              
+		});
+        $('.TUE').on('change', function() {
+		    $('.TUE').not(this).prop('checked', false);
+              
+		});
+       
+        $('.CALC').on('change', function() {
+		    $('.CALC').not(this).prop('checked', false);
+              
+		});
+        $('.MTRANS').on('change', function() {
+		    $('.MTRANS').not(this).prop('checked', false);
+              
+		});
+   
+        
+   //checks wheter everything is checked before it sends to the API
+$('#form1').submit(function(e){
+    var Age_number = $('#Age').val();
+    var Height_number = $('#Height').val();
+    var Weight_number = $('#Weight').val();
+    if ($("input:checkbox:checked").size() < 12 || $.isNumeric(Age_number)==false || $.isNumeric(Height_number)==false| $.isNumeric(Weight_number)==false){
+    e.preventDefault();
+    alert("Please check or fill all the boxes")
+    }
+    else{
+        $('.boxData').hide("slow");
+        $('#Results').show(2000);
+    }
+    });
+
+
+
+    </script>
+{% endblock %}

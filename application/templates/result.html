@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>Hi, {{ current_user.username}}!</h1>
+<div  id ="Results">
+    <p>
+        <h1>DESCRIPTIONS OF THE MODEL AND PROJECT</h1>
+        {% for result in results %}
+        <p>{{ result }} </p>
+        {% endfor %}
+        <img src="data:image/jpeg;base64, {{ img }}">
+    </p>
+    <p>The table below shows the 5 latest inserted data in the database from the user.</p>
+    <p>BMI label: What was the user's BMI-value at given time</p>
+    <p>BMI predicted: What the ML model predict the value to be?</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>BMI label</th>
+                <th>BMI predicted</th>
+            </tr>
+        </thead>
+       
+            
+            {% for i in range(0, b_count) %}
+            <tr>
+                {% for j in range(0, b_count) %}
+                
+                <td> {{ f[i][j] }}</td>
+               
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            
+    
+    </table>
+    
+ 
+</div>
+{% endblock %}
