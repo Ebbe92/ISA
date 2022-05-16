@@ -31,4 +31,9 @@ else:
 app.logger.setLevel(logging.INFO)
 app.logger.info('Python project')
 
+
+if __name__ == '__main__':
+    app.run()
+
+
 from application import routes, models
