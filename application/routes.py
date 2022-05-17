@@ -20,7 +20,8 @@ from matplotlib import style
 import matplotlib.cm as cm
 import matplotlib.colors as colors
 
-import seaborn as sns
+
+
 
 
 from io import BytesIO
@@ -245,14 +246,7 @@ def make_figure(height, weight, bmi):
     c=np.array(["black", "grey"])
     #cdict={0: 'red',1: 'red',2: 'green',3: 'red',4: 'red',5: 'red',6: 'red'}
     p.scatter(x,y, c=c)
-    #p.arrow(x[0],y[0],dx=0, dy=y[1]-y[0], width=0.01, color='black')
-   # for g in np.unique(x):
-    #    ix = np.where(x== g)
-    #colors = {"Underweight": 'red', "Normal": 'green', "Overweight":'red', "Obesity I":'red', "Obesity II":'red', "Obesity III":'red'}
-    #p.axes.set_xticklabels(["","Underweight", "Normal", "Overweight", "Obesity I", "Obesity II", "Obesity III", ""], rotation=20, ha='right', rotation_mode='anchor', fontdict=None, minor=False)
-    #weight.axes.set_xticklabels(["","Underweight", "Normal", "Overweight", "Obesity I", "Obesity II", "Obesity III", ""], rotation=20, ha='right', rotation_mode='anchor', fontdict=None, minor=False)
-    #https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.axes.Axes.arrow.html
-
+    
 
   
     # Save it to a temporary buffer. https://matplotlib.org/3.5.0/gallery/user_interfaces/web_application_server_sgskip.html
