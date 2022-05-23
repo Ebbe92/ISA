@@ -90,9 +90,6 @@ def project():
         X = X.drop('Weight',axis=1)  
         t_list=(request.form.getlist('mycheckbox'))#returns a list
         t_list=convert(t_list) #convert all numbers in the list to float
-        #if (len(t_list)!=14):
-         #   return render_template("project.html", index=True)
-        #print(t_list)
         t_list_1=t_list[1:15]
         test_data=[]
         test_data.append(t_list_1)#appends the data - needs a 2d input
@@ -103,25 +100,23 @@ def project():
         X_fit2=pipeline.fit_transform(X)#transforming the data, so it's scaled according to the rest of the data
         F=[]
         F.append(X_fit2[-1])#appends the last list again - model needs 2d array
-        model = load('modelrf.joblib')
+        model = load('model.joblib')
         y_pred_0 = model.predict(F)#predicts the result based on the latest input
         results=[]
         str_result= "At the moment the BMI value is {BMI}. If the user continues with this lifestyle, he'll/she'll be in the BMI-class {BMI_PRED}".format(BMI=BMI_result(t_list[0], t_list[3]), BMI_PRED=y_pred_0[0])
         results.append(str_result)#sends the results
-        #plot
-        bmi_results=[]
-        bmi_results.append(BMI_result(t_list[0], t_list[3]))
-        uid= current_user.id
+        
+        
       
         img=make_figure(t_list[3],t_list[0],y_pred_0[0])
-       
+
+        uid= current_user.id
         u=User.query.get(uid)
         b=u.posts.all()
-        b_count=BMI.query.filter_by(user_id=uid).count() # https://stackoverflow.com/questions/34692571/how-to-use-count-in-flask-sqlalchemy
         bmi_label_results=np.array([])
         bmi_predicted_results=np.array([])
         bmi_time_results=np.array([])
-        for n in range(0, b_count):
+        for n in range(0, len(b)):
             date_time=b[n].timestamp
             d=date_time.strftime("%d %b, %Y") # https://www.programiz.com/python-programming/datetime/strftime
             bmi_label_results=np.append(bmi_label_results, b[n].BMI_label)
@@ -129,17 +124,18 @@ def project():
             bmi_time_results=np.append(bmi_time_results, d)
         f=np.array(list(zip(bmi_time_results, bmi_label_results, bmi_predicted_results)))
         final=np.array([])
-        if b_count > 5: 
+        if len(b) > 5: 
           final=f[-5:, :]
           b_count=5
         else:
           final= f
-        print(y_pred_0[0])
-        bi=BMI(BMI_label=str(bmi_results[0]), BMI_predicted=str(y_pred_0[0]), author=u)
+          b_count=len(b)
+        
+        bi=BMI(BMI_label=str(BMI_result(t_list[0], t_list[3])), BMI_predicted=str(y_pred_0[0]), author=u)
         db.session.add(bi)
         db.session.commit()
        
-        return render_template("result.html", index=True, results=results, bmi_results=bmi_results, img=img, b_count=b_count, f=final)
+        return render_template("result.html", index=True, results=results, img=img, b_count=b_count, f=final)
     else:
         return render_template("project.html", index=True)
 
@@ -192,16 +188,13 @@ def make_figure(height, weight, bmi):
     def calc_weight (bmi, height):
         weight=bmi*(height*height)
         return weight
-    #BYG FUNKTION - https://stackoverflow.com/questions/10046262/how-to-shade-region-under-the-curve-in-matplotlib
-    #https://www.geeksforgeeks.org/matplotlib-axes-axes-twinx-in-python/
-    h = np.arange(1.4,2.1,0.01)
+    h = np.arange(1.4,2.1,0.01) #GRAPH AS THRESHOLD
     p.plot(h, calc_weight(39.91,h), color ='red') #OBESITY III 
     p.plot(h,calc_weight(35,h)) #OBESITY II
     p.plot(h,calc_weight(30,h)) #OBESITY I
     p.plot(h,calc_weight(25,h)) #OVERWEIGHT
     p.plot(h,calc_weight(18.5,h), color='green')#NORMAL
-    #p.plot(np.linspace(1.2,2.5),(np.linspace(26.63,115.656)))
-    d= pd.read_csv("ObesityData.csv")
+    d= pd.read_csv("ObesityData.csv") #SCATTER PLOT OF THE DATA
     cond=[
         (d['NObeyesdad']=='Obesity_Type_III'),
         (d['NObeyesdad']=='Obesity_Type_II'),
@@ -214,6 +207,7 @@ def make_figure(height, weight, bmi):
     colorlist = ['red','orange','yellow','purple','purple','green','blue']
     d['c']=np.select(cond, colorlist)
     p.scatter(d['Height'], d['Weight'], c=d['c'].values)
+
  
   
 
@@ -243,16 +237,30 @@ def make_figure(height, weight, bmi):
     y=np.array([])
     y=np.append(y,weight)
     y=np.append(y,weight_calc_bmi(bmi,height))
-    c=np.array(["black", "grey"])
-    #cdict={0: 'red',1: 'red',2: 'green',3: 'red',4: 'red',5: 'red',6: 'red'}
-    p.scatter(x,y, c=c)
+    c=np.array(["black", "white"])
+    p.scatter(x,y, s=50, c=c)
+    text=['BMI value at current time (BLACK DOT)', 'The BMI value that the model predicted(WHITE DOT)']
     
+    p.annotate(
+        text[0],
+        (x[0],y[0]),
+        xytext=(1.4, 160), 
+        color='Black',
+        bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),
+        arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=0', color ='black'))
+    p.annotate(
+        text[1],
+        (x[1],y[1]),
+        xytext=(1.4, 10), 
+        color='Black',
+        bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),
+        arrowprops=dict(arrowstyle='->', connectionstyle='arc3,rad=0', color ='black')) #https://www.tutorialspoint.com/how-to-annotate-the-points-on-a-scatter-plot-with-automatically-placed-arrows-in-matplotlib
+
 
   
     # Save it to a temporary buffer. https://matplotlib.org/3.5.0/gallery/user_interfaces/web_application_server_sgskip.html
     buf = BytesIO()
     f.savefig(buf, format="jpeg")
-    #b64encoded_str = base64.b64encode(f)
     # Embed the result in the html output.
     data = base64.b64encode(buf.getbuffer()).decode("ascii") #https://docs.python.org/3/library/base64.html
     return data 
